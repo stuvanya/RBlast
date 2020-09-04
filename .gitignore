@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# msvs specific
+*Debug.win32*
+*Release.win32*
+*.user
+*.vs*
