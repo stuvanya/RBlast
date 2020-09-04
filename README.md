@@ -28,6 +28,6 @@
 
 **Контакты**  
 для отправки решенного задания и вопросов  
-[EMail](kolosov@antsgames.com)  
+[EMail](mailto:kolosov@antsgames.com)  
 [Telegram](https://telegram.me/RottenKotten)  
 
