@@ -24,6 +24,8 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "Classes/Button.hpp"
+#include "Classes/LongPushButton.hpp"
 
 USING_NS_CC;
 
@@ -101,20 +103,9 @@ bool HelloWorld::init()
         this->addChild(label, 1);
     }
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    setupButtons();
+    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
 }
 
@@ -130,4 +121,58 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 
 
+}
+
+void HelloWorld::setupButtons()
+{
+    auto idle_sprite = Sprite::create("b_0_0.png");
+    auto pushed_sprite = Sprite::create("b_0_2.png");
+    auto dragout_sprite = Sprite::create("b_0_3.png");
+    auto long_idle_sprite = Sprite::create("b_1_0.png");
+    auto long_pushed_sprite = Sprite::create("b_1_2.png");
+    auto long_dragout_sprite = Sprite::create("b_1_3.png");
+    auto long_long_pushed_sprite = Sprite::create("b_1_1.png");
+
+    auto content = Rect(idle_sprite->getContentSize() / -2, idle_sprite->getContentSize());
+    auto expand = Rect(content.origin + Point(-10, -10), content.size + Size(20, 20));
+    auto safe = Rect(content.origin + Point(-20, -20), content.size + Size(40, 40));
+
+    auto button = Button::create(content, expand, safe);
+    button->setPosition(Vec2(100, 50));
+    button->addDependingElement(idle_sprite, ButtonState::IDLE);
+    button->addDependingElement(pushed_sprite, ButtonState::PUSHED);
+    button->addDependingElement(dragout_sprite, ButtonState::DRAG_OUT);
+    addChild(button);
+
+
+    auto longButton = LongPushButton::create(content, expand, safe, 2);
+    longButton->setPosition(Vec2(200, 50));
+    longButton->addDependingElement(long_idle_sprite, ButtonState::IDLE);
+    longButton->addDependingElement(long_pushed_sprite, ButtonState::PUSHED);
+    longButton->addDependingElement(long_pushed_sprite, ButtonState::PUSHED_LONG);
+    longButton->addDependingElement(long_dragout_sprite, ButtonState::DRAG_OUT);
+    //longButton->addDependingElement(long_long_pushed_sprite, ButtonState::PUSHED_LONG);
+    addChild(longButton);
+
+    auto test_sprite = Sprite::create("HelloWorld.png");
+    auto test_sprite1 = Sprite::create("HelloWorld.png");
+    auto test_sprite2 = Sprite::create("HelloWorld.png");
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    test_sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+    test_sprite1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + 150));
+    test_sprite2->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y + 300));
+    addChild(test_sprite);
+    addChild(test_sprite1);
+    addChild(test_sprite2);
+
+    button->setClickListener([test_sprite]() {
+        test_sprite->setVisible(!test_sprite->isVisible());
+        });
+    longButton->setClickListener([test_sprite1]() {
+        test_sprite1->setVisible(!test_sprite1->isVisible());
+        });
+    longButton->setLongClickListener([test_sprite2]() {
+        test_sprite2->setVisible(!test_sprite2->isVisible());
+        });
 }
