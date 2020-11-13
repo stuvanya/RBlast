@@ -90,8 +90,8 @@ void LongPushButton::setState(ButtonState state)
 {
 	if (_state != state)
 	{
-		//if (state != ButtonState::PUSHED_LONG)
-		//    unschedule(schedule_selector(LongPushButton::updateTimer));
+		if (state != ButtonState::PUSHED_LONG)
+		    unschedule(schedule_selector(LongPushButton::updateTimer));
 		if (state == ButtonState::PUSHED)
 			scheduleOnce(schedule_selector(LongPushButton::updateTimer), _time);
 		_state = state;

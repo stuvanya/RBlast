@@ -149,9 +149,8 @@ void HelloWorld::setupButtons()
     longButton->setPosition(Vec2(200, 50));
     longButton->addDependingElement(long_idle_sprite, ButtonState::IDLE);
     longButton->addDependingElement(long_pushed_sprite, ButtonState::PUSHED);
-    longButton->addDependingElement(long_pushed_sprite, ButtonState::PUSHED_LONG);
     longButton->addDependingElement(long_dragout_sprite, ButtonState::DRAG_OUT);
-    //longButton->addDependingElement(long_long_pushed_sprite, ButtonState::PUSHED_LONG);
+    longButton->addDependingElement(long_long_pushed_sprite, ButtonState::PUSHED_LONG);
     addChild(longButton);
 
     auto test_sprite = Sprite::create("HelloWorld.png");
