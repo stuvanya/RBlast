@@ -21,9 +21,6 @@ public:
 	void setClickListener(std::function<void()> callback);
 	void addDependingElement(Node* element, ButtonState state);
 	void removeDependingElement(Node* element);
-	void setContentZone(Rect content);
-	void setExpandZone(Rect expand);
-	void setSafeZone(Rect safe);
 protected:
 	Button(Rect content, Rect expand, Rect safe);
 	ButtonState _state;

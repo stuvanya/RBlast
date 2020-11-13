@@ -55,18 +55,6 @@ void Button::removeDependingElement(Node* element)
 	}
 }
 
-void Button::setContentZone(Rect content)
-{
-}
-
-void Button::setExpandZone(Rect expand)
-{
-}
-
-void Button::setSafeZone(Rect safe)
-{
-}
-
 void Button::updateSkin()
 {
 	for (auto element : _dependingElements)
